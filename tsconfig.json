@@ -1,9 +1,9 @@
 {
     "compilerOptions": {
-        "module": "CommonJS",
-        "target": "es2015",
+        "module": "Node16",
+        "target": "ES2015",
         "jsx": "react-jsx",
-        "strict": true
+        //"strict": true
     },
     "include": [
         "./**/*"
