@@ -1,18 +1,46 @@
 // eslint-disable-next-line no-unused-vars
-import React, { useState } from "react";
+import React, { useEffect, useReducer, useState } from "react";
 import "./App.css";
 import background from "./assets/background/at-bg.webp";
-import characters from "./characters";
 import CardSection from "./components/CardSection";
 import GameoverPage from "./pages/GameOverPage";
 import StartPage from "./pages/StartPage";
+import gameReducer, {
+  ACTIONS,
+  initGameState,
+  initialChar,
+} from "./reducer/gameReducer";
 
 function App() {
-  const five = characters.filter((_, idx) => idx < 5);
+  const [gameState, dispatch] = useReducer(
+    gameReducer,
+    initialChar,
+    initGameState
+  );
+
+  useEffect(() => {
+    localStorage.setItem("bestScore", JSON.stringify(gameState.bestScore));
+  }, [gameState.bestScore]);
+
+  useEffect(() => {
+    console.log(gameState.characters.filter((c) => c.isClicked));
+    if (gameState.currentScore == gameState.characters.length) {
+      console.log("win");
+      dispatch({ type: ACTIONS.WIN_GAME });
+    }
+  }, [gameState.characters]);
+
+  console.log("render");
   return (
     <>
       <div className="flex flex-col min-h-screen min-w-full max-w-7xl">
-        <CardSection cards={five} />
+        {!gameState.isGameStart ? (
+          <StartPage dispatch={dispatch} />
+        ) : gameState.isGameStart && !gameState.isGameOver ? (
+          <CardSection gameState={gameState} dispatch={dispatch} />
+        ) : (
+          <GameoverPage gameState={gameState} dispatch={dispatch} />
+        )}
       </div>
       <div
         className="min-h-full min-w-full  bg-no-repeat bg-cover bg-center absolute top-0 -z-10"

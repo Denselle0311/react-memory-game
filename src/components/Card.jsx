@@ -1,19 +1,17 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Tilt from "react-parallax-tilt";
 import cardBack from "../assets/cards/bc.jpg";
 
-// eslint-disable-next-line react/prop-types
-export default function Card({ src, children }) {
-  const [isClick, setIsClick] = useState(false);
-
-  const isFlipY = isClick ? "[transform:rotateY(180deg)]" : "";
+export default function Card(props) {
+  // eslint-disable-next-line react/prop-types
+  const { src, children, handleClick, isClicked } = props;
+  const isFlipY = isClicked ? "[transform:rotateY(180deg)]" : "";
   const nameGreater10 = children?.length > 10;
 
   return (
     <div
       onClick={() => {
-        setIsClick((c) => !c);
-        setTimeout(() => setIsClick((c) => !c), 800);
+        handleClick();
       }}
       className={`w-[100px] lg:w-[180px] xl:w-[220px] ${isFlipY} cursor-pointer aspect-[1/1.546]  rounded-[1.25rem]`}
       style={{ transition: "transform 1s", transformStyle: "preserve-3d" }}
