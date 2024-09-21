@@ -4,5 +4,5 @@ import { defineConfig } from 'vite'
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react()],
-  base: '/https://github.com/Denselle0311/react-memory-game/',
+  base: '/react-memory-game/',
 })
