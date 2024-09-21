@@ -16,12 +16,24 @@ export default function GameoverPage({ gameState, dispatch }) {
       <h1 className="text-white lg:text-7xl">
         You {gameState.isWin ? "Win!!" : "Loss!!"}
       </h1>
-      <Button
-        onClick={() => dispatch({ type: ACTIONS.RESET_TO_HOME })}
-        className="bg-black py-1 px-3 lg:px-5 lg:py-2"
-      >
-        Restart
-      </Button>
+      <div className="flex flex-col text-2xl">
+        <span>Score: {gameState.currentScore}</span>
+        <span>BestScore: {gameState.bestScore}</span>
+      </div>
+      <div className="flex gap-5">
+        <Button
+          onClick={() => dispatch({ type: ACTIONS.PLAY_AGAIN })}
+          className="bg-black py-1 px-3 lg:px-5 lg:py-2"
+        >
+          Restart
+        </Button>
+        <Button
+          onClick={() => dispatch({ type: ACTIONS.RESET_TO_HOME })}
+          className="bg-black py-1 px-3 lg:px-5 lg:py-2"
+        >
+          Home
+        </Button>
+      </div>
     </div>
   );
 }

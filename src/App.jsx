@@ -18,10 +18,6 @@ function App() {
     initGameState
   );
 
-  useEffect(() => {
-    localStorage.setItem("bestScore", JSON.stringify(gameState.bestScore));
-  }, [gameState.bestScore]);
-
   const isWin = gameState.currentScore == gameState.difficulty?.rounds;
   useEffect(() => {
     if (isWin) {

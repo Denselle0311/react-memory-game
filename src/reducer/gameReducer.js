@@ -4,6 +4,7 @@ import { rand } from "../utils/helper";
 export const ACTIONS = {
   START_GAME: 'start-game',
   RESET_TO_HOME: 'reset-to-home',
+  PLAY_AGAIN: 'play-again',
   WIN_GAME: 'win-game',
   CLICK_CARD: 'click-card',
   INCREMENT_SCORE: 'increment-score',
@@ -52,7 +53,7 @@ export function initGameState(charArr) {
     isGameOver: false,
     isWin: false,
     currentScore: 0,
-    bestScore: JSON.parse(localStorage.getItem('bestScore')) || 0,
+    bestScore: 0,
   };
 };
 
@@ -88,6 +89,7 @@ export default function gameReducer(gameState, action) {
 
       return {
         ...initGameState(chars),
+        bestScore: 0,
         currentScore: 0,
         isWin: false,
       };
@@ -97,6 +99,16 @@ export default function gameReducer(gameState, action) {
         ...gameState,
         isWin: true,
       });
+    }
+    case ACTIONS.PLAY_AGAIN: {
+      const chars = initializeChar(characters, gameState.difficulty);
+      return {
+        ...gameState,
+        characters: chars,
+        cardsToDisplay: shuffle(chars, gameState.difficulty),
+        isGameOver: false,
+        isWin: false,
+      }
     }
     case ACTIONS.INCREMENT_SCORE: {
       return {
@@ -116,7 +128,6 @@ export default function gameReducer(gameState, action) {
       const arrayWithClickedChar = gameState.characters.map((char) =>
         char.id === action.id ? { ...char, isClicked: true } : char
       );
-      console.log(arrayWithClickedChar);
 
       return {
         ...gameState,

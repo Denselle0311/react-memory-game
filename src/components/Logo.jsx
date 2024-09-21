@@ -1,10 +1,13 @@
+import { ACTIONS } from "../reducer/gameReducer";
+
 // eslint-disable-next-line react/prop-types
-export default function Logo({ isHeader }) {
+export default function Logo({ isHeader, dispatch }) {
   return (
     <>
       {isHeader ? (
         <img
-          className="h-32 cursor-pointer"
+          onClick={() => dispatch({ type: ACTIONS.RESET_TO_HOME })}
+          className="max-h-10 cursor-pointer md:max-h-20"
           src="src/assets/Adventure-time-logo.png"
           alt=""
         />
