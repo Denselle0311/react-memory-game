@@ -22,13 +22,13 @@ function App() {
     localStorage.setItem("bestScore", JSON.stringify(gameState.bestScore));
   }, [gameState.bestScore]);
 
+  const isWin = gameState.currentScore == gameState.difficulty?.rounds;
   useEffect(() => {
-    console.log(gameState.characters.filter((c) => c.isClicked));
-    if (gameState.currentScore == gameState.characters.length) {
+    if (isWin) {
       console.log("win");
       dispatch({ type: ACTIONS.WIN_GAME });
     }
-  }, [gameState.characters]);
+  }, [isWin]);
 
   console.log("render");
   return (
