@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ACTIONS } from "../reducer/gameReducer";
 import Card from "./Card";
 
@@ -9,15 +9,10 @@ export default function CardSection(props) {
   const [isClicked, setIsClicked] = useState(false);
 
   function handleClick(char) {
-    const chosenCharacter = gameState.characters.find((c) => c.id === char.id);
-
-    if (chosenCharacter.isClicked) {
-      console.log("loss");
-    }
-
-    console.log("flip true");
+    console.time();
+    if (isClicked) return;
     setIsClicked((i) => !i);
-
+    console.log("flip true");
     dispatch({ type: ACTIONS.INCREMENT_SCORE });
 
     dispatch({ type: ACTIONS.CLICK_CARD, id: char.id });
@@ -30,6 +25,7 @@ export default function CardSection(props) {
     setTimeout(() => {
       setIsClicked((i) => !i);
       console.log("flip false");
+      console.timeEnd();
     }, 1300);
   }
 
