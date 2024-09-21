@@ -8,13 +8,13 @@ export default function Logo({ isHeader, dispatch }) {
         <img
           onClick={() => dispatch({ type: ACTIONS.RESET_TO_HOME })}
           className="max-h-10 cursor-pointer md:max-h-20"
-          src="src/assets/Adventure-time-logo.png"
+          src="./src/assets/Adventure-time-logo.png"
           alt=""
         />
       ) : (
         <img
           className="max-w-[300px] lg:max-w-md xl:max-w-2xl"
-          src="src/assets/Adventure-time-logo.png"
+          src="./src/assets/Adventure-time-logo.png"
           alt=""
         />
       )}

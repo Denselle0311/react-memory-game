@@ -2,8 +2,8 @@
 import Button from "../components/Button";
 import { ACTIONS } from "../reducer/gameReducer";
 
-const winBg = "url(src/assets/background/at-bg.jpg)";
-const lossBg = "url(src/assets/background/at-diff-bg.jpg)";
+const winBg = "url(./src/assets/background/at-bg.jpg)";
+const lossBg = "url(./src/assets/background/at-diff-bg.jpg)";
 
 export default function GameoverPage({ gameState, dispatch }) {
   return (
